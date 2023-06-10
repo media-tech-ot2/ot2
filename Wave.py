@@ -1,7 +1,6 @@
 import random as r
 
 class Wave:
-    
     def __init__(self, **kwargs):
         self.kwargs = kwargs
         self.currentFrame = 0
@@ -83,10 +82,16 @@ class Wave:
         for i in range(len(self.xValues)):
             x = self.x + self.xValues[i]
             y = self.y + i * self.ySpacing
+            #if "randomVisible" in kwargs:
+            #    if r.random() >= kwargs["randomVisible"]:
+            #        tint(255, 255, 255, int(255 - 255 * (1 - min(kwargs["randomVisible"], 1) * 0.5)))
+                
             if "animation" in kwargs:
                 kwargs["animation"].draw2(x, y, (i * 3 + self.currentFrame) % 30 / 30.0)
             else:
                 ellipse(x, y, 16, 16)
+            
+            noTint()
         
     def getParameter(self, keyName, defaultValue):
         if keyName in self.kwargs:
